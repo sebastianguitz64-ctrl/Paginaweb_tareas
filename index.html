@@ -14,7 +14,7 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
     <div class="loader" id="loader" aria-hidden="true">
@@ -230,10 +230,39 @@
           personalizada.
         </p>
         <div class="contact-box card">
-          <p id="selectedSubject">Materia seleccionada: Ninguna</p>
+          <p id="selectedSubject" aria-live="polite">Materia seleccionada: Ninguna</p>
+          <form id="requestForm" class="request-form">
+            <label>
+              Tu nombre
+              <input name="name" type="text" autocomplete="name" minlength="3" required />
+            </label>
+            <label>
+              Materia
+              <select name="subject" id="subjectField" required>
+                <option value="">Selecciona una materia</option>
+                <option>Scratch</option>
+                <option>Visual</option>
+                <option>Matemática</option>
+                <option>Fifu</option>
+                <option>Química</option>
+                <option>Inglés</option>
+                <option>Otra / cotización personalizada</option>
+              </select>
+            </label>
+            <label>
+              ¿Qué necesitas?
+              <textarea name="description" rows="4" minlength="10" required placeholder="Explica el tema, instrucciones y cualquier detalle importante."></textarea>
+            </label>
+            <label>
+              Fecha de entrega <span class="optional">(opcional)</span>
+              <input name="deadline" type="date" />
+            </label>
+            <p class="form-hint">Al enviar, prepararemos el mensaje y abriremos nuestro Instagram para que lo mandes por DM.</p>
+            <button class="btn" type="submit">📩 Preparar solicitud por DM</button>
+            <p id="formStatus" class="form-status" role="status" aria-live="polite"></p>
+          </form>
           <div class="hero-actions">
-            <a href="#" class="btn">📩 Solicitar tarea</a>
-            <a href="#" class="btn btn-ghost">💬 Consultar por DM</a>
+            <a href="https://www.instagram.com/h44i2026/" class="btn btn-ghost" target="_blank" rel="noopener noreferrer">💬 Consultar por DM</a>
           </div>
         </div>
       </section>
@@ -253,6 +282,6 @@
       </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script type="module" src="js/script.js"></script>
   </body>
 </html>

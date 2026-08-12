@@ -5,6 +5,9 @@ const revealElements = document.querySelectorAll(".reveal");
 const cards = document.querySelectorAll(".price-card");
 const selectedSubject = document.getElementById("selectedSubject");
 const countEls = document.querySelectorAll("[data-count]");
+const requestForm = document.getElementById("requestForm");
+const subjectField = document.getElementById("subjectField");
+const formStatus = document.getElementById("formStatus");
 
 menuBtn?.addEventListener("click", () => {
   navLinks?.classList.toggle("show");
@@ -60,7 +63,35 @@ document.querySelectorAll(".solicitar").forEach((btn) => {
     if (subject && selectedSubject) {
       selectedSubject.textContent = `Materia seleccionada: ${subject}`;
     }
+    if (subject && subjectField) {
+      subjectField.value = subject;
+    }
   });
+});
+
+requestForm?.addEventListener("submit", async (event) => {
+  event.preventDefault();
+
+  if (!requestForm.reportValidity()) return;
+
+  const data = new FormData(requestForm);
+  const deadline = data.get("deadline");
+  const message = [
+    "Hola, quiero solicitar ayuda con una tarea.",
+    `Nombre: ${data.get("name")}`,
+    `Materia: ${data.get("subject")}`,
+    `Detalle: ${data.get("description")}`,
+    deadline ? `Fecha de entrega: ${deadline}` : "",
+  ].filter(Boolean).join("\n");
+
+  try {
+    await navigator.clipboard.writeText(message);
+    formStatus.textContent = "Mensaje copiado. Se abrirá Instagram; pégalo y envíalo por DM.";
+  } catch {
+    formStatus.textContent = "No pudimos copiar el mensaje automáticamente. Abre Instagram y cuéntanos los detalles del formulario.";
+  }
+
+  window.open(CONFIG.instagram, "_blank", "noopener,noreferrer");
 });
 
 const animateCounter = (el) => {
@@ -105,3 +136,4 @@ window.addEventListener("scroll", () => {
     emoji.style.transform = `translateY(${extra}px)`;
   });
 });
+import { CONFIG } from "./constants.js";
