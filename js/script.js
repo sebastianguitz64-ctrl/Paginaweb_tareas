@@ -1,3 +1,5 @@
+import { CONFIG } from "./constants.js";
+
 const menuBtn = document.getElementById("menuBtn");
 const navLinks = document.getElementById("navLinks");
 const loader = document.getElementById("loader");
@@ -8,18 +10,28 @@ const countEls = document.querySelectorAll("[data-count]");
 const requestForm = document.getElementById("requestForm");
 const subjectField = document.getElementById("subjectField");
 const formStatus = document.getElementById("formStatus");
+const deadlineField = requestForm?.elements.namedItem("deadline");
 
 menuBtn?.addEventListener("click", () => {
-  navLinks?.classList.toggle("show");
-  menuBtn.classList.toggle("open");
+  const isOpen = navLinks?.classList.toggle("show") || false;
+  menuBtn.classList.toggle("open", isOpen);
+  menuBtn.setAttribute("aria-expanded", String(isOpen));
 });
 
 document.querySelectorAll(".nav-links a").forEach((link) => {
   link.addEventListener("click", () => {
     navLinks?.classList.remove("show");
     menuBtn?.classList.remove("open");
+    menuBtn?.setAttribute("aria-expanded", "false");
   });
 });
+
+menuBtn?.setAttribute("aria-expanded", "false");
+menuBtn?.setAttribute("aria-controls", "navLinks");
+
+if (deadlineField instanceof HTMLInputElement) {
+  deadlineField.min = new Date().toISOString().split("T")[0];
+}
 
 window.addEventListener("load", () => {
   setTimeout(() => loader?.classList.add("hide"), 500);
@@ -75,24 +87,76 @@ requestForm?.addEventListener("submit", async (event) => {
   if (!requestForm.reportValidity()) return;
 
   const data = new FormData(requestForm);
+  const payload = {
+    name: String(data.get("name") || "").trim(),
+    subject: String(data.get("subject") || "").trim(),
+    description: String(data.get("description") || "").trim(),
+    deadline: data.get("deadline") ? String(data.get("deadline")) : null,
+  };
   const deadline = data.get("deadline");
   const message = [
     "Hola, quiero solicitar ayuda con una tarea.",
-    `Nombre: ${data.get("name")}`,
-    `Materia: ${data.get("subject")}`,
-    `Detalle: ${data.get("description")}`,
+    `Nombre: ${payload.name}`,
+    `Materia: ${payload.subject}`,
+    `Detalle: ${payload.description}`,
     deadline ? `Fecha de entrega: ${deadline}` : "",
   ].filter(Boolean).join("\n");
+  const submitButton = requestForm.querySelector('button[type="submit"]');
 
-  try {
-    await navigator.clipboard.writeText(message);
-    formStatus.textContent = "Mensaje copiado. Se abrirá Instagram; pégalo y envíalo por DM.";
-  } catch {
-    formStatus.textContent = "No pudimos copiar el mensaje automáticamente. Abre Instagram y cuéntanos los detalles del formulario.";
+  setFormStatus("Registrando solicitud...", "");
+  if (submitButton instanceof HTMLButtonElement) {
+    submitButton.disabled = true;
   }
 
-  window.open(CONFIG.instagram, "_blank", "noopener,noreferrer");
+  try {
+    const response = await fetch(`${CONFIG.apiBase}/requests`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    });
+
+    if (!response.ok) {
+      const error = await response.json().catch(() => ({}));
+      const details = Array.isArray(error.details) ? error.details.join(" ") : "";
+      throw new Error(details || error.error || "No pudimos registrar la solicitud.");
+    }
+
+    let copied = true;
+    try {
+      await navigator.clipboard.writeText(message);
+    } catch {
+      copied = false;
+    }
+
+    setFormStatus(
+      copied
+        ? "Solicitud registrada. Se abrirá Instagram; pega el mensaje y envíalo por DM."
+        : "Solicitud registrada. Se abrirá Instagram; escribe el detalle por DM si el mensaje no se copió.",
+      "success"
+    );
+    requestForm.reset();
+    if (selectedSubject) {
+      selectedSubject.textContent = "Materia seleccionada: Ninguna";
+    }
+    cards.forEach((card) => card.classList.remove("selected"));
+    window.open(CONFIG.instagram, "_blank", "noopener,noreferrer");
+  } catch (error) {
+    setFormStatus(error.message || "No pudimos registrar la solicitud. Intenta de nuevo o escríbenos por Instagram.", "error");
+  } finally {
+    if (submitButton instanceof HTMLButtonElement) {
+      submitButton.disabled = false;
+    }
+  }
 });
+
+function setFormStatus(message, type) {
+  if (!formStatus) return;
+  formStatus.textContent = message;
+  formStatus.classList.toggle("success", type === "success");
+  formStatus.classList.toggle("error", type === "error");
+}
 
 const animateCounter = (el) => {
   const target = Number(el.getAttribute("data-count") || 0);
@@ -136,4 +200,3 @@ window.addEventListener("scroll", () => {
     emoji.style.transform = `translateY(${extra}px)`;
   });
 });
-import { CONFIG } from "./constants.js";

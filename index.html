@@ -42,6 +42,7 @@
           <a href="#inicio">Inicio</a>
           <a href="#precios">Precios</a>
           <a href="#como-funciona">Cómo funciona</a>
+          <a href="#faq">FAQ</a>
           <a href="#contacto">Contacto</a>
           <a href="#contacto" class="btn btn-sm">📩 Solicitar tarea</a>
         </div>
@@ -191,14 +192,53 @@
           </article>
           <article class="step card">
             <span>02</span>
-            <h3>Escríbenos</h3>
-            <p>Envíanos los detalles de tu tarea por DM.</p>
+            <h3>Completa el formulario</h3>
+            <p>Deja tu nombre, materia, detalles y fecha de entrega si ya la tienes.</p>
           </article>
           <article class="step card">
             <span>03</span>
-            <h3>Recibe tu trabajo</h3>
-            <p>Coordinamos los detalles y realizamos el trabajo solicitado.</p>
+            <h3>Seguimos por Instagram</h3>
+            <p>Registramos tu solicitud y abrimos Instagram para coordinar por DM.</p>
           </article>
+        </div>
+      </section>
+
+      <section id="faq" class="section container reveal">
+        <h2>❓ Preguntas frecuentes</h2>
+        <p class="section-subtitle">
+          Respuestas rápidas antes de pedir tu cotización.
+        </p>
+        <div class="faq-grid">
+          <details class="faq-item card">
+            <summary>¿Cómo pido una tarea?</summary>
+            <p>
+              Completa el formulario con tu nombre, materia, descripción y fecha
+              de entrega si la tienes. La solicitud queda registrada y luego
+              puedes escribirnos por Instagram.
+            </p>
+          </details>
+          <details class="faq-item card">
+            <summary>¿El precio siempre es el mismo?</summary>
+            <p>
+              Algunas materias tienen precio fijo y otras dependen del tamaño,
+              dificultad e instrucciones del trabajo. Te confirmamos la
+              cotización por DM.
+            </p>
+          </details>
+          <details class="faq-item card">
+            <summary>¿La fecha de entrega es obligatoria?</summary>
+            <p>
+              No. Si todavía no sabes la fecha exacta puedes dejarla vacía, pero
+              agregarla ayuda a priorizar tu solicitud.
+            </p>
+          </details>
+          <details class="faq-item card">
+            <summary>¿Puedo consultar algo que no aparece en la lista?</summary>
+            <p>
+              Sí. Selecciona "Otra / cotización personalizada" y cuéntanos lo
+              que necesitas para revisarlo.
+            </p>
+          </details>
         </div>
       </section>
 
@@ -224,46 +264,54 @@
       </section>
 
       <section id="contacto" class="section container reveal">
-        <h2>💬 Contacto por DM</h2>
+        <h2>📩 Solicita tu tarea</h2>
         <p class="section-subtitle">
-          Escríbenos por DM para solicitar tu tarea o pedir cotización
-          personalizada.
+          Envía la solicitud por el formulario y continúa la coordinación por
+          Instagram en <strong>@h44i2026</strong>.
         </p>
-        <div class="contact-box card">
-          <p id="selectedSubject" aria-live="polite">Materia seleccionada: Ninguna</p>
-          <form id="requestForm" class="request-form">
-            <label>
-              Tu nombre
-              <input name="name" type="text" autocomplete="name" minlength="3" required />
-            </label>
-            <label>
-              Materia
-              <select name="subject" id="subjectField" required>
-                <option value="">Selecciona una materia</option>
-                <option>Scratch</option>
-                <option>Visual</option>
-                <option>Matemática</option>
-                <option>Fifu</option>
-                <option>Química</option>
-                <option>Inglés</option>
-                <option>Otra / cotización personalizada</option>
-              </select>
-            </label>
-            <label>
-              ¿Qué necesitas?
-              <textarea name="description" rows="4" minlength="10" required placeholder="Explica el tema, instrucciones y cualquier detalle importante."></textarea>
-            </label>
-            <label>
-              Fecha de entrega <span class="optional">(opcional)</span>
-              <input name="deadline" type="date" />
-            </label>
-            <p class="form-hint">Al enviar, prepararemos el mensaje y abriremos nuestro Instagram para que lo mandes por DM.</p>
-            <button class="btn" type="submit">📩 Preparar solicitud por DM</button>
-            <p id="formStatus" class="form-status" role="status" aria-live="polite"></p>
-          </form>
-          <div class="hero-actions">
-            <a href="https://www.instagram.com/h44i2026/" class="btn btn-ghost" target="_blank" rel="noopener noreferrer">💬 Consultar por DM</a>
+        <div class="contact-layout">
+          <div class="contact-box card">
+            <p id="selectedSubject" aria-live="polite">Materia seleccionada: Ninguna</p>
+            <form id="requestForm" class="request-form">
+              <label>
+                Tu nombre
+                <input name="name" type="text" autocomplete="name" minlength="3" maxlength="100" required />
+              </label>
+              <label>
+                Materia
+                <select name="subject" id="subjectField" required>
+                  <option value="">Selecciona una materia</option>
+                  <option>Scratch</option>
+                  <option>Visual</option>
+                  <option>Matemática</option>
+                  <option>Fifu</option>
+                  <option>Química</option>
+                  <option>Inglés</option>
+                  <option>Otra / cotización personalizada</option>
+                </select>
+              </label>
+              <label>
+                ¿Qué necesitas?
+                <textarea name="description" rows="5" minlength="10" maxlength="2000" required placeholder="Explica el tema, instrucciones y cualquier detalle importante."></textarea>
+              </label>
+              <label>
+                Fecha de entrega <span class="optional">(opcional)</span>
+                <input name="deadline" type="date" />
+              </label>
+              <p class="form-hint">Tu solicitud quedará registrada y después abriremos Instagram para que continúes por DM.</p>
+              <button class="btn" type="submit">📩 Enviar solicitud</button>
+              <p id="formStatus" class="form-status" role="status" aria-live="polite"></p>
+            </form>
           </div>
+          <aside class="instagram-card card" aria-label="Contacto por Instagram">
+            <span class="instagram-badge">Instagram oficial</span>
+            <h3>@h44i2026</h3>
+            <p>
+              Usa Instagram para resolver dudas rápidas, confirmar el precio y
+              coordinar los detalles después de enviar el formulario.
+            </p>
+            <a href="https://www.instagram.com/h44i2026/" class="btn btn-ghost" target="_blank" rel="noopener noreferrer">💬 Abrir Instagram</a>
+          </aside>
         </div>
       </section>
     </main>
@@ -277,11 +325,13 @@
         <div class="footer-links">
           <a href="#inicio">Inicio</a>
           <a href="#precios">Precios</a>
+          <a href="#faq">FAQ</a>
           <a href="#contacto">Contacto</a>
         </div>
       </div>
     </footer>
 
+    <script src="js/runtime-config.js"></script>
     <script type="module" src="js/script.js"></script>
   </body>
 </html>
