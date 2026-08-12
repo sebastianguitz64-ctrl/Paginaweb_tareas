@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Ayuda con tareas escolares y académicas. Precios accesibles, atención rápida y solicitud por DM."
+    />
+    <title>📚 Ayuda con Tareas</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="loader" id="loader" aria-hidden="true">
+      <div class="loader-ring"></div>
+      <p>Cargando experiencia...</p>
+    </div>
+
+    <div class="bg-glow bg-glow-1"></div>
+    <div class="bg-glow bg-glow-2"></div>
+    <div class="floating-emoji emoji-1">📚</div>
+    <div class="floating-emoji emoji-2">✏️</div>
+    <div class="floating-emoji emoji-3">🧪</div>
+    <div class="floating-emoji emoji-4">➗</div>
+    <div class="floating-emoji emoji-5">📊</div>
+    <div class="floating-emoji emoji-6">👁️</div>
+    <div class="floating-emoji emoji-7">🇬🇧</div>
+
+    <header class="navbar-wrap">
+      <nav class="navbar container">
+        <a href="#inicio" class="brand">📚 Tareas</a>
+        <button class="menu-btn" id="menuBtn" aria-label="Abrir menú">
+          <span></span><span></span><span></span>
+        </button>
+        <div class="nav-links" id="navLinks">
+          <a href="#inicio">Inicio</a>
+          <a href="#precios">Precios</a>
+          <a href="#como-funciona">Cómo funciona</a>
+          <a href="#contacto">Contacto</a>
+          <a href="#contacto" class="btn btn-sm">📩 Solicitar tarea</a>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <section id="inicio" class="hero container reveal">
+        <div class="hero-content">
+          <div class="badges">
+            <span>⚡ Atención rápida</span>
+            <span>💰 Precios accesibles</span>
+            <span>📚 Varias materias</span>
+          </div>
+          <h1>📚 ¿Necesitas ayuda con alguna tarea?</h1>
+          <h2>¡Nosotros te ayudamos! 📝</h2>
+          <p>
+            Trabajos claros, ordenados y adaptados a lo que necesitas. Elige tu
+            materia, revisa el precio y escríbenos para solicitar tu tarea.
+          </p>
+          <div class="hero-actions">
+            <a href="#contacto" class="btn">📩 Solicitar tarea</a>
+            <a href="#contacto" class="btn btn-ghost">💬 Consultar por DM</a>
+          </div>
+          <div class="hero-stats">
+            <div>
+              <strong data-count="6">0</strong>
+              <span>Materias</span>
+            </div>
+            <div>
+              <strong data-count="100">0</strong>
+              <span>Atención rápida</span>
+            </div>
+            <div>
+              <strong data-count="1">0</strong>
+              <span>Contacto por DM</span>
+            </div>
+          </div>
+        </div>
+        <div class="hero-visual card">
+          <div class="screen">
+            <h3>Panel de Estudiante</h3>
+            <ul>
+              <li>✅ Tareas claras</li>
+              <li>⚡ Respuesta rápida</li>
+              <li>🎯 Cotización personalizada</li>
+            </ul>
+            <div class="icons-row">
+              <span>💻</span><span>📘</span><span>✍️</span><span>🧠</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="precios" class="section container reveal">
+        <h2>💰 Precios accesibles</h2>
+        <p class="section-subtitle">
+          Elige una materia, revisa el precio y solicita por DM.
+        </p>
+        <div class="price-grid">
+          <article class="price-card card tilt" data-subject="Scratch">
+            <div class="icon">✏️</div>
+            <h3>Scratch</h3>
+            <p class="price">Q10 – Q30</p>
+            <p>Pequeños proyectos, ejercicios y tareas relacionadas con Scratch.</p>
+            <span class="tag">Precio variable</span>
+            <a href="#contacto" class="btn btn-sm solicitar">Solicitar</a>
+          </article>
+          <article class="price-card card tilt" data-subject="Visual">
+            <div class="icon">👁️</div>
+            <h3>Visual</h3>
+            <p class="price">Q20 – Q30</p>
+            <p>Trabajos y actividades relacionadas con contenido visual.</p>
+            <span class="tag">Precio variable</span>
+            <a href="#contacto" class="btn btn-sm solicitar">Solicitar</a>
+          </article>
+          <article class="price-card card tilt" data-subject="Matemática">
+            <div class="icon">➗</div>
+            <h3>Matemática</h3>
+            <p class="price">Q15</p>
+            <p>Resolución y apoyo con tareas de matemática.</p>
+            <a href="#contacto" class="btn btn-sm solicitar">Solicitar</a>
+          </article>
+          <article class="price-card card tilt" data-subject="Fifu">
+            <div class="icon">📊</div>
+            <h3>Fifu</h3>
+            <p class="price">Q15</p>
+            <p>Trabajos y actividades de Fifu.</p>
+            <a href="#contacto" class="btn btn-sm solicitar">Solicitar</a>
+          </article>
+          <article class="price-card card tilt" data-subject="Química">
+            <div class="icon">🧪</div>
+            <h3>Química</h3>
+            <p class="price">Q10</p>
+            <p>Tareas y ejercicios de química.</p>
+            <a href="#contacto" class="btn btn-sm solicitar">Solicitar</a>
+          </article>
+          <article class="price-card card tilt" data-subject="Inglés">
+            <div class="icon">🇬🇧</div>
+            <h3>Inglés</h3>
+            <p class="price">Q10</p>
+            <p>Tareas y actividades de inglés.</p>
+            <a href="#contacto" class="btn btn-sm solicitar">Solicitar</a>
+          </article>
+        </div>
+        <p class="note">
+          * Los precios pueden variar para trabajos personalizados que no estén
+          en la lista.
+        </p>
+      </section>
+
+      <section class="section container reveal">
+        <h2>⚡ ¿Por qué elegirnos?</h2>
+        <div class="benefits-grid">
+          <article class="benefit card">
+            <h3>✅ Trabajo claro y ordenado</h3>
+            <p>
+              Nos enfocamos en entregar trabajos fáciles de entender y bien
+              estructurados.
+            </p>
+          </article>
+          <article class="benefit card">
+            <h3>⚡ Atención rápida</h3>
+            <p>Respondemos rápidamente a tus solicitudes y consultas.</p>
+          </article>
+          <article class="benefit card">
+            <h3>💰 Precios accesibles</h3>
+            <p>Opciones económicas para diferentes tipos de tareas.</p>
+          </article>
+          <article class="benefit card">
+            <h3>🎯 Nos adaptamos a ti</h3>
+            <p>
+              Si necesitas algo diferente, puedes escribirnos para solicitar una
+              cotización personalizada.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section id="como-funciona" class="section container reveal">
+        <h2>🔄 ¿Cómo funciona?</h2>
+        <div class="steps">
+          <article class="step card">
+            <span>01</span>
+            <h3>Elige tu tarea</h3>
+            <p>Selecciona la materia o cuéntanos qué necesitas.</p>
+          </article>
+          <article class="step card">
+            <span>02</span>
+            <h3>Escríbenos</h3>
+            <p>Envíanos los detalles de tu tarea por DM.</p>
+          </article>
+          <article class="step card">
+            <span>03</span>
+            <h3>Recibe tu trabajo</h3>
+            <p>Coordinamos los detalles y realizamos el trabajo solicitado.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section container reveal">
+        <div class="custom card">
+          <h2>¿Necesitas algo diferente? 🤔</h2>
+          <p>
+            No te preocupes. Si tu tarea no aparece en nuestra lista, escríbenos
+            al DM y cuéntanos qué necesitas. Te damos una cotización sin
+            compromiso.
+          </p>
+          <a href="#contacto" class="btn pulse">📩 Pedir cotización</a>
+        </div>
+      </section>
+
+      <section class="section cta-final reveal">
+        <div class="container">
+          <h2>🔥 ¿Tienes una tarea pendiente?</h2>
+          <p>Mándamela y vemos cómo podemos ayudarte.</p>
+          <a href="#contacto" class="btn btn-xl">🚀 Solicitar ayuda</a>
+        </div>
+        <div class="particles" aria-hidden="true"></div>
+      </section>
+
+      <section id="contacto" class="section container reveal">
+        <h2>💬 Contacto por DM</h2>
+        <p class="section-subtitle">
+          Escríbenos por DM para solicitar tu tarea o pedir cotización
+          personalizada.
+        </p>
+        <div class="contact-box card">
+          <p id="selectedSubject">Materia seleccionada: Ninguna</p>
+          <div class="hero-actions">
+            <a href="#" class="btn">📩 Solicitar tarea</a>
+            <a href="#" class="btn btn-ghost">💬 Consultar por DM</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <a href="#contacto" class="floating-dm" aria-label="Ir a contacto">💬 DM</a>
+
+    <footer class="footer">
+      <div class="container">
+        <h3>📚 Ayuda con Tareas</h3>
+        <p>Trabajos claros, ordenados y a precios accesibles.</p>
+        <div class="footer-links">
+          <a href="#inicio">Inicio</a>
+          <a href="#precios">Precios</a>
+          <a href="#contacto">Contacto</a>
+        </div>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
