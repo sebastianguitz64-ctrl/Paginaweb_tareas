@@ -109,19 +109,8 @@ requestForm?.addEventListener("submit", async (event) => {
   }
 
   try {
-    const response = await fetch(`${CONFIG.apiBase}/requests`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(payload),
-    });
-
-    if (!response.ok) {
-      const error = await response.json().catch(() => ({}));
-      const details = Array.isArray(error.details) ? error.details.join(" ") : "";
-      throw new Error(details || error.error || "No pudimos registrar la solicitud.");
-    }
+    const apiBase = String(CONFIG.apiBase || "").replace(/\/$/, "");
+    const apiResult = await registerRequest(apiBase, payload);
 
     let copied = true;
     try {
@@ -131,9 +120,7 @@ requestForm?.addEventListener("submit", async (event) => {
     }
 
     setFormStatus(
-      copied
-        ? "Solicitud registrada. Se abrirá Instagram; pega el mensaje y envíalo por DM."
-        : "Solicitud registrada. Se abrirá Instagram; escribe el detalle por DM si el mensaje no se copió.",
+      getSuccessMessage({ copied, registered: apiResult.registered, warning: apiResult.warning }),
       "success"
     );
     requestForm.reset();
@@ -150,6 +137,52 @@ requestForm?.addEventListener("submit", async (event) => {
     }
   }
 });
+
+async function registerRequest(apiBase, payload) {
+  if (!apiBase) {
+    return {
+      registered: false,
+      warning: "El registro automatico no esta configurado.",
+    };
+  }
+
+  try {
+    const response = await fetch(`${apiBase}/requests`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    });
+
+    if (!response.ok) {
+      const error = await response.json().catch(() => ({}));
+      const details = Array.isArray(error.details) ? error.details.join(" ") : "";
+      throw new Error(details || error.error || "No pudimos registrar la solicitud.");
+    }
+
+    return { registered: true, warning: "" };
+  } catch (error) {
+    console.error("No se pudo registrar la solicitud en la API:", error);
+
+    return {
+      registered: false,
+      warning: "No pudimos guardar la solicitud automaticamente.",
+    };
+  }
+}
+
+function getSuccessMessage({ copied, registered, warning }) {
+  const nextStep = copied
+    ? "Se abrira Instagram; pega el mensaje y envialo por DM."
+    : "Se abrira Instagram; escribe el detalle por DM si el mensaje no se copio.";
+
+  if (registered) {
+    return `Solicitud registrada. ${nextStep}`;
+  }
+
+  return `${warning} ${nextStep}`;
+}
 
 function setFormStatus(message, type) {
   if (!formStatus) return;

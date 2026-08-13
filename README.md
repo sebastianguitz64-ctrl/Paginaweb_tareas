@@ -20,11 +20,20 @@ python -m http.server 8080
 
 Abrir `http://localhost:8080`.
 
-Si la API usa otra URL, editar `js/runtime-config.js`:
+El sitio puede funcionar solo con Instagram. Para guardar solicitudes en la
+base de datos, editar `js/runtime-config.js` con la URL publica de la API:
 
 ```js
 window.APP_CONFIG = {
   apiBase: "https://tu-api.com/api",
+};
+```
+
+Para desarrollo local con el backend corriendo en el puerto por defecto:
+
+```js
+window.APP_CONFIG = {
+  apiBase: "http://localhost:3001/api",
 };
 ```
 

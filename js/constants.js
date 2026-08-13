@@ -3,7 +3,7 @@
 export const CONFIG = {
   instagram: "https://www.instagram.com/h44i2026/",
   instagramHandle: "@h44i2026",
-  apiBase: globalThis.APP_CONFIG?.apiBase || "http://localhost:3001/api",
+  apiBase: globalThis.APP_CONFIG?.apiBase || "",
 };
 
 export const SUBJECTS = {
